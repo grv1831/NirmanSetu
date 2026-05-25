@@ -102,7 +102,7 @@ export default function Home() {
   const [preview, setPreview] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/workers?limit=5&sort=rating&available=true')
+    axios.get('https://nirmansetu-api.onrender.com/api/workers?limit=5&sort=rating&available=true')
       .then(r => setPreview(r.data.data || []))
       .catch(() => {});
   }, []);

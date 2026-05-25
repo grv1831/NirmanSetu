@@ -1,6 +1,7 @@
 // src/pages/FindLabour.js
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+const BASE = 'https://nirmansetu-api.onrender.com';
 import WorkerCard from '../components/WorkerCard';
 import Footer from '../components/Footer';
 
@@ -56,7 +57,7 @@ export default function FindLabour() {
       if (f.maxRate)   params.maxRate   = f.maxRate;
       if (f.available) params.available = f.available;
 
-      const res = await axios.get('/api/workers', { params });
+      const res = await axios.get(`${BASE}/api/workers`, { params });
       setWorkers(res.data.data || []);
       setTotal(res.data.total || 0);
       setPages(res.data.pages || 1);
