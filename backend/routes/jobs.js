@@ -2,9 +2,10 @@
 const express = require('express');
 const router  = express.Router();
 const Job     = require('../models/Job');
+const User    = require('../models/User');
 const { protect, authorize } = require('../middleware/auth');
 
-// ── GET /api/jobs  — List all open jobs (public) ──
+// GET /api/jobs — List all open jobs (public)
 router.get('/', async (req, res) => {
   try {
     const { state, district, workType, page = 1, limit = 10 } = req.query;
@@ -26,9 +27,24 @@ router.get('/', async (req, res) => {
   }
 });
 
-// ── POST /api/jobs  — Owner posts a new job ──
+// POST /api/jobs — Owner posts a job (requires hire credit Rs1)
 router.post('/', protect, authorize('owner', 'contractor'), async (req, res) => {
   try {
+    const owner = await User.findById(req.user.id);
+
+    // Check hire credits
+    if (!owner.hireCredits || owner.hireCredits < 1) {
+      return res.status(403).json({
+        success: false,
+        message: 'You need to pay Rs1 to hire a worker.',
+        requiresPayment: true,
+        redirectTo: '/pay?role=owner'
+      });
+    }
+
+    // Deduct 1 hire credit
+    await User.findByIdAndUpdate(req.user.id, { $inc: { hireCredits: -1 } });
+
     const job = await Job.create({ ...req.body, owner: req.user.id });
     res.status(201).json({ success: true, data: job });
   } catch (err) {
@@ -36,7 +52,7 @@ router.post('/', protect, authorize('owner', 'contractor'), async (req, res) => 
   }
 });
 
-// ── GET /api/jobs/:id  — Single job detail ──
+// GET /api/jobs/:id — Single job detail
 router.get('/:id', async (req, res) => {
   try {
     const job = await Job.findById(req.params.id)
@@ -49,9 +65,20 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// ── POST /api/jobs/:id/apply  — Worker applies for a job ──
+// POST /api/jobs/:id/apply — Worker applies for a job
 router.post('/:id/apply', protect, authorize('worker'), async (req, res) => {
   try {
+    // Worker must have paid Rs10
+    const worker = await User.findById(req.user.id);
+    if (!worker.workerProfile?.registrationPaid) {
+      return res.status(403).json({
+        success: false,
+        message: 'Pay Rs10 to activate your profile and apply for jobs.',
+        requiresPayment: true,
+        redirectTo: '/pay?role=worker'
+      });
+    }
+
     const job = await Job.findById(req.params.id);
     if (!job) return res.status(404).json({ success: false, message: 'Job not found' });
     if (job.applicants.includes(req.user.id))
@@ -65,12 +92,11 @@ router.post('/:id/apply', protect, authorize('worker'), async (req, res) => {
   }
 });
 
-// ── PUT /api/jobs/:id/assign/:workerId  — Owner assigns worker ──
+// PUT /api/jobs/:id/assign/:workerId — Owner assigns worker
 router.put('/:id/assign/:workerId', protect, authorize('owner', 'contractor'), async (req, res) => {
   try {
     const job = await Job.findOne({ _id: req.params.id, owner: req.user.id });
     if (!job) return res.status(404).json({ success: false, message: 'Job not found' });
-
     job.worker = req.params.workerId;
     job.status = 'assigned';
     await job.save();
@@ -80,7 +106,7 @@ router.put('/:id/assign/:workerId', protect, authorize('owner', 'contractor'), a
   }
 });
 
-// ── PUT /api/jobs/:id/complete  — Mark job complete ──
+// PUT /api/jobs/:id/complete — Mark job complete
 router.put('/:id/complete', protect, authorize('owner', 'contractor'), async (req, res) => {
   try {
     const job = await Job.findOneAndUpdate(
@@ -89,13 +115,21 @@ router.put('/:id/complete', protect, authorize('owner', 'contractor'), async (re
       { new: true }
     );
     if (!job) return res.status(404).json({ success: false, message: 'Job not found' });
+
+    // Increment worker job count
+    if (job.worker) {
+      await User.findByIdAndUpdate(job.worker, {
+        $inc: { 'workerProfile.totalJobsDone': 1 }
+      });
+    }
+
     res.json({ success: true, data: job });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
 });
 
-// ── GET /api/jobs/my/posted  — Owner sees their jobs ──
+// GET /api/jobs/my/posted — Owner sees their jobs
 router.get('/my/posted', protect, authorize('owner', 'contractor'), async (req, res) => {
   try {
     const jobs = await Job.find({ owner: req.user.id })
@@ -107,7 +141,7 @@ router.get('/my/posted', protect, authorize('owner', 'contractor'), async (req, 
   }
 });
 
-// ── GET /api/jobs/my/applied  — Worker sees jobs they applied to ──
+// GET /api/jobs/my/applied — Worker sees applied jobs
 router.get('/my/applied', protect, authorize('worker'), async (req, res) => {
   try {
     const jobs = await Job.find({ applicants: req.user.id })
