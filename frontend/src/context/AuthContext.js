@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchMe = async () => {
     try {
-      const res = await axios.get('/api/auth/me');
+      const res = await axios.get('https://nirmansetu-api.onrender.com/api/auth/me');
       setUser(res.data.data);
     } catch {
       logout();
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (mobile, password) => {
-    const res = await axios.post('/api/auth/login', { mobile, password });
+    const res = await axios.post('https://nirmansetu-api.onrender.com/api/auth/login', { mobile, password });
     localStorage.setItem('ns_token', res.data.token);
     setToken(res.data.token);
     setUser(res.data.data);
