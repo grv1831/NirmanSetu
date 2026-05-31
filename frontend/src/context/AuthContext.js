@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (formData) => {
-    const res = await axios.post('/api/auth/register', formData);
+    const res = await axios.post('https://nirmansetu-api.onrender.com/api/auth/register', formData);
     localStorage.setItem('ns_token', res.data.token);
     setToken(res.data.token);
     setUser(res.data.data);
