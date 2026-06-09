@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
     totalRatings:       { type: Number, default: 0 },
     // Worker pays Rs10 ONCE for lifetime active profile
     registrationPaid:   { type: Boolean, default: false },
-    registrationAmount: { type: Number, default: 10 },
+    registrationAmount: { type: Number, default: 0 },
     registrationDate:   { type: Date },
     upiTransactionId:   { type: String },
   },

@@ -101,15 +101,15 @@ export default function Register() {
               {tab==='worker'?'👷 Register as Worker / Kaarigar':tab==='owner'?'🏠 Register as Property Owner':'🏗️ Contractor Registration'}
             </div>
             <div style={{ fontSize:'.7rem',color:'rgba(255,255,255,.65)',marginTop:'.2rem' }}>
-              {tab==='worker'?'Create your verified profile — ₹1 one-time fee only':tab==='owner'?'Free account — search and hire workers near you':'Source verified labour for multiple projects'}
+              {tab==='worker'?'Register free — Admin will activate your profile':tab==='owner'?'Free account — search and hire workers near you':'Source verified labour for multiple projects'}
             </div>
           </div>
 
           <form onSubmit={handleSubmit} style={{ padding:'2rem 1.8rem' }}>
             {tab==='worker' && (
               <div style={{ display:'flex',gap:'.8rem',alignItems:'center',background:'#FDF3E3',border:'1.5px solid #E0D0B8',borderLeft:'4px solid #C0392B',borderRadius:8,padding:'.9rem',marginBottom:'1.4rem' }}>
-                <span style={{ fontSize:'1.5rem',flexShrink:0 }}>🪙</span>
-                <p style={{ fontSize:'.75rem',color:'#7A6652',lineHeight:1.5 }}>One-time registration: <strong style={{ color:'#C0392B' }}>₹1 only</strong> via UPI / Paytm / Bank Transfer. No monthly fee. No commission on earnings.</p>
+                <span style={{ fontSize:'1.5rem',flexShrink:0 }}>🎉</span>
+<p style={{ fontSize:'.75rem',color:'#7A6652',lineHeight:1.5 }}>Registration is <strong style={{ color:'#1A7A40' }}>completely free!</strong> Submit your profile and admin will activate it within 24 hours.</p>
               </div>
             )}
 
@@ -192,7 +192,7 @@ export default function Register() {
             </div>
 
             <button type="submit" disabled={loading} style={{ width:'100%',padding:'.9rem',border:'none',borderRadius:9,fontFamily:"'Sora',sans-serif",fontWeight:800,fontSize:'.9rem',cursor:loading?'not-allowed':'pointer',background:tab==='worker'?'#C0392B':tab==='owner'?'#1C2833':'#2C3E50',color:'#fff',marginTop:'1.2rem',opacity:loading?.7:1,boxShadow:'3px 3px 0 rgba(0,0,0,.2)' }}>
-              {loading ? 'Registering…' : tab==='worker' ? '✅ Register & Pay ₹1 via UPI' : tab==='owner' ? '🏠 Create Free Owner Account' : '🚀 Register as Contractor'}
+              {loading ? 'Registering…' : tab==='worker' ?'✅ Register Free — Submit Profile' : tab==='owner' ? '🏠 Create Free Owner Account' : '🚀 Register as Contractor'}
             </button>
             <p style={{ textAlign:'center',fontSize:'.75rem',color:'#7A6652',marginTop:'1rem' }}>
               Already have an account? <Link to="/login" style={{ color:'#C0392B',fontWeight:700 }}>Login here</Link>

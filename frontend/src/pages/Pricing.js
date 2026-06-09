@@ -19,8 +19,8 @@ export default function Pricing() {
   const PLANS = [
     {
       role: 'For Kaarigar 💼', color: '#C0392B', badge: 'WORKERS',
-      price: '1', period: 'one-time registration',
-      desc: 'Just ₹1 to create your verified profile and start receiving job offers from across your district and state. No monthly fees — ever.',
+      price: '0', period: 'completely free',
+desc: 'Register free! Submit your profile and admin will activate it within 24 hours. No fees ever.',
       features: ['Permanent verified profile','Set your own daily rate','Appear in hyperlocal searches','WhatsApp & SMS job alerts','Work history & photo portfolio','Rating & review system','Optional Aadhaar verification badge'],
       cta: 'Register Now', route: '/register',
     },
