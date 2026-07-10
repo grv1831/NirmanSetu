@@ -95,4 +95,34 @@ router.put('/updatepassword', protect, [
   }
 });
 
+// ── POST /api/auth/forgot-password ──
+router.post('/forgot-password', async (req, res) => {
+  try {
+    const { mobile } = req.body;
+    if (!mobile)
+      return res.status(400).json({ success: false, message: 'Mobile number is required' });
+
+    // Check if user exists
+    const user = await User.findOne({ mobile });
+    if (!user)
+      return res.status(404).json({ success: false, message: 'No account found with this mobile number' });
+
+    // Generate random 6 digit temporary password
+    const tempPassword = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Save new password
+    user.password = tempPassword;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Password reset successful',
+      tempPassword,  // shown to user on screen
+      name: user.name
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 module.exports = router;
