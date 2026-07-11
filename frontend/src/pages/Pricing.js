@@ -31,13 +31,6 @@ desc: 'Register free! Submit your profile and admin will activate it within 24 h
       features: ['Free account registration','Unlimited worker searches','Village-level location filter','Compare profiles & daily rates','View work portfolios & reviews','Rate & review after job','In-app secure communication'],
       cta: 'Get Started Free', route: '/register',
     },
-    {
-      role: 'For Contractors 🏗️', color: '#1C2833', badge: 'CONTRACTOR',
-      price: '999', period: 'per month',
-      desc: 'For firms sourcing large volumes of labour. Manage teams and projects from one dashboard.',
-      features: ['Unlimited job postings','Bulk worker search','Team management dashboard','Priority listing support','Dedicated account manager','GST invoice & compliance','API access for integration'],
-      cta: 'Contact Sales', route: '/register',
-    },
   ];
 
   return (

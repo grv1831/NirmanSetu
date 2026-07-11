@@ -54,7 +54,6 @@ export default function Register() {
         };
       }
       if (tab === 'owner') payload.propertyType = form.propertyType;
-      if (tab === 'contractor') payload.companyName = form.companyName;
 
       await register(payload);
       setSuccess(true);
@@ -83,7 +82,7 @@ export default function Register() {
 
         {/* Role Tabs */}
         <div style={{ display:'flex',gap:'1rem',justifyContent:'center' }}>
-          {[['worker','💼','I\'m a Worker','Register my skills & get hired'],['owner','🏠','I Need Workers','Post jobs & hire locally'],['contractor','🏗️','I\'m a Contractor','Source labour for big projects']].map(([r,icon,title,sub]) => (
+          {[['worker','💼','I\'m a Worker','Register my skills & get hired'],['owner','🏠','I Need Workers','Post jobs & hire locally'],].map(([r,icon,title,sub]) => (
             <div key={r} onClick={() => setTab(r)} style={{ background:tab===r?'#C0392B':'rgba(255,255,255,.07)',border:`2px solid ${tab===r?'#C0392B':'rgba(255,255,255,.12)'}`,borderRadius:13,padding:'1.4rem 2rem',cursor:'pointer',textAlign:'center',minWidth:160,transition:'all .2s' }}>
               <div style={{ fontSize:'2rem',marginBottom:'.5rem' }}>{icon}</div>
               <div style={{ fontSize:'.88rem',fontWeight:800,color:'#fff',marginBottom:'.2rem' }}>{title}</div>
@@ -154,14 +153,6 @@ export default function Register() {
                   <textarea style={{ ...inp,minHeight:80,resize:'vertical' }} value={form.bio} onChange={e=>set('bio',e.target.value)} placeholder="Describe your experience, specialties, past projects…" />
                 </div>
               </>
-            )}
-
-            {/* Contractor-specific */}
-            {tab==='contractor' && (
-              <div style={{ marginTop:'.9rem' }}>
-                <label style={lbl}>Company / Firm Name</label>
-                <input style={inp} value={form.companyName} onChange={e=>set('companyName',e.target.value)} placeholder="Your firm name" />
-              </div>
             )}
 
             {/* Owner-specific */}
