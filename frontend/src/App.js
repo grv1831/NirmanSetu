@@ -13,7 +13,8 @@ import Dashboard    from './pages/Dashboard';
 import About        from './pages/About';
 import Pricing      from './pages/Pricing';
 import PostJob      from './pages/PostJob';
-import Payment      from './pages/Payment';
+import Payment        from './pages/Payment';
+import ForgotPassword from './pages/ForgotPassword';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -34,6 +35,7 @@ function AppRoutes() {
         <Route path="/about"      element={<About />} />
         <Route path="/pricing"    element={<Pricing />} />
         <Route path="/pay"        element={<PrivateRoute><Payment /></PrivateRoute>} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/post-job"   element={<PrivateRoute><PostJob /></PrivateRoute>} />
         <Route path="*"           element={<Navigate to="/" replace />} />

@@ -45,6 +45,13 @@ export default function Login() {
             <button type="submit" disabled={loading} style={{ width:'100%',padding:'.88rem',border:'none',borderRadius:9,fontFamily:"'Sora',sans-serif",fontWeight:800,fontSize:'.9rem',background:'#C0392B',color:'#fff',cursor:loading?'not-allowed':'pointer',boxShadow:'3px 3px 0 #7B241C',opacity:loading?.7:1 }}>
               {loading ? 'Logging in…' : '🔑 Login'}
             </button>
+
+            <div style={{ textAlign:'right', marginTop:'.6rem', marginBottom:'.5rem' }}>
+  <Link to="/forgot-password" style={{ fontSize:'.75rem', color:'#C0392B', fontWeight:600, textDecoration:'none' }}>
+    Forgot Password?
+  </Link>
+</div>
+
             <p style={{ textAlign:'center',fontSize:'.75rem',color:'#7A6652',marginTop:'1rem' }}>
               New to NirmanSetu? <Link to="/register" style={{ color:'#C0392B',fontWeight:700 }}>Register here</Link>
             </p>
