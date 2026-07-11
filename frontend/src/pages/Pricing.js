@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const FAQS = [
-  ['Is the ₹1 registration fee refundable?','The ₹1 fee is non-refundable. It is a nominal one-time charge to verify intent and prevent fake profiles. Once registered, your profile is permanent with no recurring charges.'],
-  ['Does NirmanSetu take commission from workers\' pay?','No. Workers keep 100% of what they earn. NirmanSetu earns a small booking convenience fee from property owners on completed bookings only.'],
-  ['Can workers increase their daily rate later?','Absolutely. Workers can update their daily rate anytime from their dashboard. Government minimum wage is shown as a reference floor. Higher-rated workers typically command better rates.'],
-  ['Do workers need a smartphone to use NirmanSetu?','No. Workers can receive job alerts and accept/decline requests via WhatsApp or simple SMS on any mobile phone. Only the ₹1 registration needs internet.'],
-  ['How is Aadhaar verification done?','Aadhaar verification is optional but recommended. Workers share their Aadhaar number during registration; our system performs an OTP-based DigiLocker verification. Verified workers get a green badge.'],
-  ['Is it really free for property owners?','Yes, completely free to register, search, browse, and contact workers. A small convenience fee is charged only on confirmed bookings via the platform.'],
+  ['Is there any registration fee?','Registration is completely free for everyone! Workers submit their profile and admin activates it within 24 hours. Owners can search and hire for free.'],
+  ['Does NirmanSetu take any commission?','Zero commission. NirmanSetu takes nothing from anyone. Workers keep 100% of what they earn. Owners pay nothing to hire. The platform is completely free for everyone.'],
+  ['Can workers increase their daily rate later?','Absolutely. Workers can update their daily rate anytime from their dashboard. Set your own price — you decide your value.'],
+  ['Do workers need a smartphone to use NirmanSetu?','No. Workers can receive job alerts and accept requests via WhatsApp or SMS on any basic mobile phone.'],
+  ['How is a worker profile activated?','After registering, admin reviews and activates your profile within 24 hours. Once active, your profile appears in searches from your area.'],
+  ['Is it really free for property owners?','Yes, 100% free! Register, search, browse, contact and hire workers — all at zero cost. No fees, no commission, no hidden charges whatsoever.'],
 ];
 
 export default function Pricing() {
@@ -17,21 +17,21 @@ export default function Pricing() {
   const [openFaq, setOpenFaq] = useState(null);
 
   const PLANS = [
-    {
-      role: 'For Kaarigar 💼', color: '#C0392B', badge: 'WORKERS',
-      price: '0', period: 'completely free',
-desc: 'Register free! Submit your profile and admin will activate it within 24 hours. No fees ever.',
-      features: ['Permanent verified profile','Set your own daily rate','Appear in hyperlocal searches','WhatsApp & SMS job alerts','Work history & photo portfolio','Rating & review system','Optional Aadhaar verification badge'],
-      cta: 'Register Now', route: '/register',
-    },
-    {
-      role: 'For Property Owners 🏠', color: '#1A7A40', badge: 'OWNERS',
-      price: '0', period: 'completely free',
-      desc: 'Free to search, browse, and connect with workers. Platform earns a small booking fee from completed jobs only.',
-      features: ['Free account registration','Unlimited worker searches','Village-level location filter','Compare profiles & daily rates','View work portfolios & reviews','Rate & review after job','In-app secure communication'],
-      cta: 'Get Started Free', route: '/register',
-    },
-  ];
+  {
+    role: 'For Kaarigar 💼', color: '#C0392B', badge: 'WORKERS',
+    price: '0', period: 'completely free',
+    desc: 'Currently FREE! Register your profile for free. Admin will activate it within 24 hours. No fees, no commission, ever.',
+    features: ['Free profile registration','Set your own daily rate','Appear in hyperlocal searches','WhatsApp & SMS job alerts','Work history & photo portfolio','Rating & review system','Admin verified & activated'],
+    cta: 'Register Free Now', route: '/register',
+  },
+  {
+    role: 'For Property Owners 🏠', color: '#1A7A40', badge: 'OWNERS',
+    price: '0', period: 'completely free',
+    desc: 'Completely FREE! Search, browse and hire workers near you. No registration fee, no commission, no hidden charges — ever.',
+    features: ['Free account registration','Unlimited worker searches','Village-level location filter','Compare profiles & daily rates','View work portfolios & reviews','Rate & review after job','In-app secure communication'],
+    cta: 'Get Started Free', route: '/register',
+  },
+];
 
   return (
     <div style={{ paddingTop: 62, fontFamily: "'Sora', sans-serif", background: '#FAFAF7' }}>
