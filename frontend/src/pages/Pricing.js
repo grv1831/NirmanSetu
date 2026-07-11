@@ -45,7 +45,7 @@ desc: 'Register free! Submit your profile and admin will activate it within 24 h
 
       {/* Plans */}
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '3rem 2.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1.5rem', marginBottom: '3rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem', marginBottom: '3rem', maxWidth: 700, margin: '0 auto 3rem' }}>
           {PLANS.map(plan => (
             <div key={plan.role} style={{ background: '#fff', border: `2px solid ${plan.color}22`, borderRadius: 14, padding: '2rem', position: 'relative', overflow: 'hidden' }}>
               {/* Top color bar */}
