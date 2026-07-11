@@ -20,7 +20,7 @@ export default function Pricing() {
   {
     role: 'For Kaarigar 💼', color: '#C0392B', badge: 'WORKERS',
     price: '0', period: 'completely free',
-    desc: 'Currently FREE! Register your profile for free. Admin will activate it within 24 hours. No fees, no commission, ever.',
+    desc: 'Completely FREE! Register your profile for free. Admin will activate it within 24 hours. No fees, no commission, ever.',
     features: ['Free profile registration','Set your own daily rate','Appear in hyperlocal searches','WhatsApp & SMS job alerts','Work history & photo portfolio','Rating & review system','Admin verified & activated'],
     cta: 'Register Free Now', route: '/register',
   },
