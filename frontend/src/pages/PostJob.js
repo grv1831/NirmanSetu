@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+const BASE = 'https://nirmansetu-api.onrender.com';
 
 const inp = { width:'100%',padding:'.65rem .85rem',border:'1.5px solid #E0D0B8',borderRadius:7,fontFamily:"'Sora',sans-serif",fontSize:'.82rem',background:'#FDF3E3',outline:'none',marginTop:'.28rem',boxSizing:'border-box' };
 const lbl = { fontSize:'.62rem',fontWeight:700,letterSpacing:'.09em',textTransform:'uppercase',color:'#7A6652' };
@@ -19,7 +20,7 @@ export default function PostJob() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('/api/jobs', {
+      await axios.post(`${BASE}/api/jobs`, {
         title: form.title, description: form.description, workType: form.workType,
         location: { state: form.state, district: form.district, village: form.village },
         duration: form.duration, budget: Number(form.budget),
